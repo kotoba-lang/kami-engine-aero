@@ -21,7 +21,10 @@
 ;; to the rom-buildup reference (sedan ≈ 0.248); retune against tunnel/large-
 ;; domain CFD. The RANKING from the LBM is exact; only the scale is calibrated.
 (def ^:const calibration-2d 0.081)   ; sectional block ≈ 3.06 → 0.248
-(def ^:const calibration-3d 0.045)   ; vehicle box3d ≈ 5.56 → 0.250
+;; 3D BGK is laminar (Cd cannot reach the turbulent automotive value); this
+;; anchors the fastback3d raw (≈2.89 @Re150, 16% blockage) to the rom-buildup
+;; sedan reference. Retiring this needs MRT/LES + GPU, not just resolution.
+(def ^:const calibration-3d 0.086)   ; vehicle fastback3d ≈ 2.89 → 0.248
 
 (defn- resolve-bin []
   (or (System/getenv "KAMI_CFD_BIN")
