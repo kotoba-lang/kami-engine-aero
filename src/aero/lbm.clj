@@ -16,9 +16,12 @@
             [clojure.java.io :as io]
             [clojure.string :as str]))
 
-;; sectional Cd (block ≈ 3.06 @Re100) → vehicle Cd; anchored so a sedan block
-;; maps to ≈ the rom-buildup reference (0.248). Retune against CFD/tunnel data.
-(def ^:const calibration 0.081)
+;; kami-cfd returns drag inflated by the coarse domain (2D sectional, or 3D
+;; frontal-area-normalised but high-blockage). These constants anchor each mode
+;; to the rom-buildup reference (sedan ≈ 0.248); retune against tunnel/large-
+;; domain CFD. The RANKING from the LBM is exact; only the scale is calibrated.
+(def ^:const calibration-2d 0.081)   ; sectional block ≈ 3.06 → 0.248
+(def ^:const calibration-3d 0.045)   ; vehicle box3d ≈ 5.56 → 0.250
 
 (defn- resolve-bin []
   (or (System/getenv "KAMI_CFD_BIN")
@@ -29,27 +32,35 @@
            first)))
 
 (defn- shape-of
-  "Map the aero case's afterbody taper to a kami-cfd body profile."
-  [case]
-  (if (>= (get-in case [:shape :taper] 0.5) 0.5) "teardrop" "block"))
+  "Map the aero case's afterbody taper to a kami-cfd body profile, per dim.
+  3D: fastback (tapered roof) vs squareback box; 2D: teardrop vs block."
+  [case dim]
+  (let [streamlined? (>= (get-in case [:shape :taper] 0.5) 0.5)]
+    (if (= dim 3)
+      (if streamlined? "fastback3d" "box3d")
+      (if streamlined? "teardrop" "block"))))
 
 (defn solve
-  "Run kami-cfd for `case`; return {:Cd .. :sectional-cd .. :solver :lbm}."
+  "Run kami-cfd for `case`; return {:Cd .. :solver :lbm ..}. `:solver {:dim 3}`
+  selects the D3Q19 vehicle-Cd solver; default is the 2D sectional solver."
   [case]
   (let [bin   (or (resolve-bin)
                   (throw (ex-info "kami-cfd binary not found; set KAMI_CFD_BIN or build it"
                                   {:tried "KAMI_CFD_BIN / sibling kami-cfd build"})))
-        re    (get-in case [:solver :re] 100)
-        steps (get-in case [:solver :steps] 3000)
-        {:keys [exit out err]} (sh/sh bin (shape-of case) (str re) (str steps))
+        dim   (get-in case [:solver :dim] 2)
+        shape (shape-of case dim)
+        re    (get-in case [:solver :re] (if (= dim 3) 150 100))
+        steps (get-in case [:solver :steps] (if (= dim 3) 1500 3000))
+        {:keys [exit out err]} (sh/sh bin shape (str re) (str steps))
         _     (when-not (zero? exit)
                 (throw (ex-info "kami-cfd failed" {:exit exit :err err})))
         m     (edn/read-string (str/trim out))
-        sect  (:sectional-cd m)
-        cd    (* calibration sect)]
+        raw   (or (:vehicle-cd m) (:sectional-cd m))
+        k     (if (= dim 3) calibration-3d calibration-2d)
+        cd    (* k raw)]
     {:Cd cd :CdA (* cd (:frontal-area case))
-     :sectional-cd sect :backend :kami-cfd
-     :shape (keyword (shape-of case)) :solver :lbm}))
+     :raw-cd raw :dim dim :backend :kami-cfd
+     :shape (keyword shape) :solver :lbm}))
 
 ;; Register the high-fidelity backend on the shared contract.
 (defmethod cae/solve :lbm [case] (solve case))
