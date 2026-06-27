@@ -21,12 +21,12 @@
 ;; to the rom-buildup reference (sedan ≈ 0.248); retune against tunnel/large-
 ;; domain CFD. The RANKING from the LBM is exact; only the scale is calibrated.
 (def ^:const calibration-2d 0.081)   ; sectional block ≈ 3.06 → 0.248
-;; 3D now runs with a Smagorinsky LES, so the drag is taken in the turbulent
-;; HIGH-Re PLATEAU (Re-independent, the validatable regime) instead of a single
-;; laminar point. The residual scale gap (~2.0 vs ~0.3) is the coarse grid +
-;; 16% blockage, not the Re physics; a low-blockage fine grid (GPU) would shrink
-;; it further. Anchors fastback3d @Re3000 (≈2.01) to the rom-buildup sedan ref.
-(def ^:const calibration-3d 0.123)   ; vehicle fastback3d ≈ 2.01 → 0.247
+;; 3D runs with Smagorinsky LES (turbulent high-Re plateau) and free-slip
+;; far-field side/top walls (no-slip only on the road), so confinement no longer
+;; inflates the drag. The residual scale gap (~1.8 vs ~0.3) is now mainly the
+;; coarse grid + crude box geometry; a fine grid on real geometry (GPU) shrinks
+;; it. Anchors fastback3d @Re3000 (≈1.79) to the rom-buildup sedan ref.
+(def ^:const calibration-3d 0.139)   ; vehicle fastback3d ≈ 1.79 → 0.249
 
 (defn- resolve-bin []
   (or (System/getenv "KAMI_CFD_BIN")
