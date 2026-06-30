@@ -66,6 +66,7 @@ loop without a hard cross-repo dependency. Result is datafied:
 | `src/aero/solver.cljc` | the `:rom-buildup` Cd solver (a `kami-cfd` LBM backend would share this contract) |
 | `src/aero/case.cljc` | EDN case + class/powertrain → shape-descriptor priors |
 | `src/aero/bridge.cljc` | Cd → road-load → range effect, datafied |
+| `src/aero/native.cljc` | native backend descriptors (`kami-cfd` as adapter data, not authority) |
 | `src/aero/datom.cljc` | kotoba Datom-log (EAVT) emission |
 | `src/aero/cli.cljc` | demo |
 | `test/aero/aero_test.clj` | the aero contract, executable |
