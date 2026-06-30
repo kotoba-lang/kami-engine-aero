@@ -1,5 +1,7 @@
 # aero-clj
 
+[![CI](https://github.com/kotoba-lang/aero/actions/workflows/ci.yml/badge.svg)](https://github.com/kotoba-lang/aero/actions/workflows/ci.yml)
+
 Reduced-order **aerodynamic drag (Cd) solver** for clean-sheet vehicles, in
 portable Clojure (`.cljc`). It replaces the *fixed Cd prior* the
 [`vehicle-design-actor`](../vehicle-design-actor) assumes with a **computed,
