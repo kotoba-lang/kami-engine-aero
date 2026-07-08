@@ -4,9 +4,9 @@
  ;;   vphysics   — road-load / aero force / range math
  ;;   cae-solver — the solve dispatch contract (:rom-buildup ↔ :lbm)
  ;; A future kami-cfd (Rust LBM) registers :lbm on the same contract.
- :deps {io.github.kotoba-lang/datom      {:git/sha "d27a5833d59d909367956705f2ec931399c891ee"}
-        io.github.kotoba-lang/vphysics   {:git/sha "32c2329ed6bd1074b2d0d3dab17f3440477cbbc3"}
-        io.github.kotoba-lang/cae-solver {:git/sha "53e27f18ddcf10615a8a17adbb78018b1ab64a17"}}
+ :deps {io.github.kotoba-lang/datom                {:git/sha "d27a5833d59d909367956705f2ec931399c891ee"}
+        io.github.kotoba-lang/kami-engine-vphysics   {:git/sha "32c2329ed6bd1074b2d0d3dab17f3440477cbbc3"}
+        io.github.kotoba-lang/kami-engine-cae-solver {:git/sha "53e27f18ddcf10615a8a17adbb78018b1ab64a17"}}
  :aliases
  {:run  {:main-opts ["-m" "aero.cli"]}
   :test {:extra-paths ["test"]
@@ -15,6 +15,6 @@
          :main-opts ["-m" "cognitect.test-runner"]
          :exec-fn cognitect.test-runner.api/test}
   ;; local sibling checkouts for workspace development (CI uses the git-sha deps above)
-  :dev {:override-deps {io.github.kotoba-lang/datom      {:local/root "../datom"}
-                        io.github.kotoba-lang/vphysics   {:local/root "../vphysics"}
-                        io.github.kotoba-lang/cae-solver {:local/root "../cae-solver"}}}}}
+  :dev {:override-deps {io.github.kotoba-lang/datom                {:local/root "../datom"}
+                        io.github.kotoba-lang/kami-engine-vphysics   {:local/root "../kami-engine-vphysics"}
+                        io.github.kotoba-lang/kami-engine-cae-solver {:local/root "../kami-engine-cae-solver"}}}}}

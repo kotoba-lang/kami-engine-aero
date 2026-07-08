@@ -1,6 +1,6 @@
-# aero-clj
+# kami-engine-aero
 
-[![CI](https://github.com/kotoba-lang/aero/actions/workflows/ci.yml/badge.svg)](https://github.com/kotoba-lang/aero/actions/workflows/ci.yml)
+[![CI](https://github.com/kotoba-lang/kami-engine-aero/actions/workflows/ci.yml/badge.svg)](https://github.com/kotoba-lang/kami-engine-aero/actions/workflows/ci.yml)
 
 Reduced-order **aerodynamic drag (Cd) solver** for clean-sheet vehicles, in
 portable Clojure (`.cljc`). It replaces the *fixed Cd prior* the
