@@ -17,4 +17,8 @@
   ;; local sibling checkouts for workspace development (CI uses the git-sha deps above)
   :dev {:override-deps {io.github.kotoba-lang/datom                {:local/root "../datom"}
                         io.github.kotoba-lang/kami-engine-vphysics   {:local/root "../kami-engine-vphysics"}
-                        io.github.kotoba-lang/kami-engine-cae-solver {:local/root "../kami-engine-cae-solver"}}}}}
+                        io.github.kotoba-lang/kami-engine-cae-solver {:local/root "../kami-engine-cae-solver"}}}
+  ;; clj-kondo as a Clojars lib (no Homebrew/system install needed).
+  :lint {:replace-deps {clj-kondo/clj-kondo {:mvn/version "2024.11.14"}}
+         :main-opts ["-m" "clj-kondo.main" "--lint" "src" "test"
+                     "--fail-level" "error"]}}}
