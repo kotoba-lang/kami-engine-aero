@@ -35,6 +35,7 @@ exactly like `vehicle-design-actor`'s `powertrain/tech`.
 ```bash
 clojure -M:run     # Cd for the same sedan as BEV vs FCEV + the range loop
 clojure -M:test    # the aero contract (band, monotonicity, BEV<FCEV, datoms)
+clojure -M:lint
 ```
 
 Demo result (sedan, 120 km/h cruise, prior Cd 0.24):
@@ -67,14 +68,19 @@ loop without a hard cross-repo dependency. Result is datafied:
 | `src/aero/case.cljc` | EDN case + class/powertrain → shape-descriptor priors |
 | `src/aero/bridge.cljc` | Cd → road-load → range effect, datafied |
 | `src/aero/native.cljc` | native backend descriptors (`kami-cfd` as adapter data, not authority) |
+| `src/aero/lbm.clj` | `:lbm` backend — shells out to the `kami-cfd` (Rust LBM) binary, calibrated to the rom-buildup reference |
 | `src/aero/datom.cljc` | kotoba Datom-log (EAVT) emission |
 | `src/aero/cli.cljc` | demo |
-| `test/aero/aero_test.clj` | the aero contract, executable |
+| `test/aero/aero_test.clj` | the aero contract (band, monotonicity, BEV<FCEV, datoms) |
+| `test/aero/model_test.clj` | `aero.model`'s coefficient-table invariants |
+| `test/aero/lbm_test.clj` | `aero.lbm`'s shape mapping, calibration constants, and contract registration (no external binary invoked) |
+| `test/aero/native_test.clj` | native backend/result contract |
 
 ## Status
 
 Working reduced-order reference. The `:rom-buildup` solver is engineering-useful
 at concept stage; a validated `kami-cfd` (lattice-Boltzmann) backend implementing
-the same `solve` contract is the next fidelity step. Constants in
+the same `solve` contract is the next fidelity step (registered on the shared
+contract via `aero.lbm`, calibrated but not yet the default). Constants in
 `aero.model/default` are the single place to re-fit against CFD/wind-tunnel data.
 See `docs/adr/0001-architecture.md`.
