@@ -5,7 +5,7 @@
   of truth for the aero contract. This namespace keeps the backend boundary as
   CLJC data so hosts can choose a native executable/adapter without changing the
   case or result shape used by `aero.solver`."
-  (:require [clojure.string :as str]))
+  (:require [kotoba.lang.text :as str]))
 
 (def kami-cfd-backend
   {:backend/id :kami-cfd/lbm

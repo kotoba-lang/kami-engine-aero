@@ -6,7 +6,7 @@
   fixed prior. The BEV/FCEV split is real: a BEV's flat battery floor and small
   cooling area give a smoother, lower-drag underbody than an FCEV/ICE that must
   feed a radiator and route exhaust/tanks."
-  (:require [clojure.string :as str]))
+  (:require [kotoba.lang.text :as str]))
 
 ;; Body geometry per class (frontal area A, ref length L, and an aero shape
 ;; template). Shape descriptors ∈ [0,1]; higher = more drag-favourable EXCEPT

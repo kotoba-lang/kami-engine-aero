@@ -10,7 +10,7 @@
   Retune here as the body family or the reference data changes; a future
   high-fidelity `kami-cfd` (lattice-Boltzmann) backend plugs in behind the
   same case/datom interface and can re-fit these coefficients."
-  (:require [clojure.string :as str]))
+  (:require [kotoba.lang.text :as str]))
 
 (def ^:const rho-air 1.225)   ; kg/m^3
 (def ^:const mu-air  1.81e-5) ; Pa·s
