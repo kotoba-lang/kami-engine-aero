@@ -3,7 +3,7 @@
   — the failure mode here isn't logic bugs, it's a future retune silently
   breaking the documented invariants (`aero.solver` trusts `:max` to be a
   worst-case bound and shape descriptors to live in [0,1])."
-  (:require [clojure.string :as str]
+  (:require [kotoba.lang.text :as str]
             [clojure.test :refer [deftest is testing]]
             [aero.model :as model]))
 

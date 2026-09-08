@@ -14,7 +14,7 @@
             [clojure.edn :as edn]
             [clojure.java.shell :as sh]
             [clojure.java.io :as io]
-            [clojure.string :as str]))
+            [kotoba.lang.text :as str]))
 
 ;; kami-cfd returns drag inflated by the coarse domain (2D sectional, or 3D
 ;; frontal-area-normalised but high-blockage). These constants anchor each mode
