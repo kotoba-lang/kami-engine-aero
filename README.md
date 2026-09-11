@@ -33,9 +33,9 @@ exactly like `vehicle-design-actor`'s `powertrain/tech`.
 ## Run
 
 ```bash
-clojure -M:run     # Cd for the same sedan as BEV vs FCEV + the range loop
-clojure -M:test    # the aero contract (band, monotonicity, BEV<FCEV, datoms)
-clojure -M:lint
+kbb -M:run     # Cd for the same sedan as BEV vs FCEV + the range loop
+kbb -M:test    # the aero contract (band, monotonicity, BEV<FCEV, datoms)
+kbb -M:lint
 ```
 
 Demo result (sedan, 120 km/h cruise, prior Cd 0.24):
