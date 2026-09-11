@@ -3,7 +3,7 @@
   build-up, show the component decomposition, and feed each Cd back into the
   range loop against vehicle-design-actor's fixed prior (Cd 0.24).
 
-  Run: clojure -M:run"
+  Run: kbb -M:run"
   (:require [aero.case :as case]
             [aero.solver :as solver]
             [aero.bridge :as bridge]))
