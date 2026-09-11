@@ -63,18 +63,18 @@ loop without a hard cross-repo dependency. Result is datafied:
 
 | File | Role |
 |---|---|
-| `src/aero/model.cljc` | edn-tunable build-up coefficients (the single table) |
-| `src/aero/solver.cljc` | the `:rom-buildup` Cd solver (a `kami-cfd` LBM backend would share this contract) |
-| `src/aero/case.cljc` | EDN case + class/powertrain → shape-descriptor priors |
-| `src/aero/bridge.cljc` | Cd → road-load → range effect, datafied |
-| `src/aero/native.cljc` | native backend descriptors (`kami-cfd` as adapter data, not authority) |
-| `src/aero/lbm.clj` | `:lbm` backend — shells out to the `kami-cfd` (Rust LBM) binary, calibrated to the rom-buildup reference |
+| `src/aero/model.cljk` | edn-tunable build-up coefficients (the single table) |
+| `src/aero/solver.cljk` | the `:rom-buildup` Cd solver (a `kami-cfd` LBM backend would share this contract) |
+| `src/aero/case.cljk` | EDN case + class/powertrain → shape-descriptor priors |
+| `src/aero/bridge.cljk` | Cd → road-load → range effect, datafied |
+| `src/aero/native.cljk` | native backend descriptors (`kami-cfd` as adapter data, not authority) |
+| `src/aero/lbm.cljk` | `:lbm` backend — shells out to the `kami-cfd` (Rust LBM) binary, calibrated to the rom-buildup reference |
 | `src/aero/datom.cljc` | kotoba Datom-log (EAVT) emission |
 | `src/aero/cli.cljc` | demo |
-| `test/aero/aero_test.clj` | the aero contract (band, monotonicity, BEV<FCEV, datoms) |
-| `test/aero/model_test.clj` | `aero.model`'s coefficient-table invariants |
-| `test/aero/lbm_test.clj` | `aero.lbm`'s shape mapping, calibration constants, and contract registration (no external binary invoked) |
-| `test/aero/native_test.clj` | native backend/result contract |
+| `test/aero/aero_test.cljk` | the aero contract (band, monotonicity, BEV<FCEV, datoms) |
+| `test/aero/model_test.cljk` | `aero.model`'s coefficient-table invariants |
+| `test/aero/lbm_test.cljk` | `aero.lbm`'s shape mapping, calibration constants, and contract registration (no external binary invoked) |
+| `test/aero/native_test.cljk` | native backend/result contract |
 
 ## Status
 

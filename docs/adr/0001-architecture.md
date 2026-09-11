@@ -34,7 +34,7 @@ kami-genesis と同じ clean-room パターンで、**reduced-order ソルバを
 
 - 同一セダンで BEV Cd 0.248 / FCEV 0.267 を計算（afterbody が支配）。FCEV は床下粗さ
   ＋冷却開口で +19 カウント → 航続 −4.3%。BEV 0.248 は設計 prior 0.24 を 3% 以内で**検証**。
-- 検証は `test/aero/aero_test.clj`（7 tests / 11 assertions, green）: 現実 Cd 帯・各レバー
+- 検証は `test/aero/aero_test.cljk`（7 tests / 11 assertions, green）: 現実 Cd 帯・各レバー
   単調性・BEV<FCEV・afterbody 支配・決定論・datom 化・ループ方向。
 - 依存ゼロの純 clj（JVM/SCI/CLJS/GraalVM 可搬）。係数 re-fit と kami-cfd 配線が次段。
 
