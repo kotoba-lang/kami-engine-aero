@@ -1,5 +1,5 @@
 (ns aero.native-test
-  (:require [clojure.test :refer [deftest is]]
+  (:require [kotoba.test :refer [deftest is]]
             [aero.case :as case]
             [aero.native :as native]
             [aero.solver :as solver]))

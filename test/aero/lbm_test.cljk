@@ -6,7 +6,7 @@
   calibration constants that anchor kami-cfd's raw Cd to the rom-buildup
   reference, and that :lbm is actually registered on the shared
   `cae.solver` contract."
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.test :refer [deftest is testing]]
             [aero.lbm :as lbm]
             [cae.solver :as cae]))
 
