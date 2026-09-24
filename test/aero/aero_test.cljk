@@ -2,7 +2,7 @@
   "Aero-clj contract: the build-up lands in a realistic Cd band, is monotone in
   each shape lever, splits BEV<FCEV, is deterministic, and the range loop moves
   the right way."
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.test :refer [deftest is testing]]
             [aero.case :as case]
             [aero.solver :as solver]
             [aero.bridge :as bridge]))

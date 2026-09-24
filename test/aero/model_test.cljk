@@ -4,7 +4,7 @@
   breaking the documented invariants (`aero.solver` trusts `:max` to be a
   worst-case bound and shape descriptors to live in [0,1])."
   (:require [kotoba.lang.text :as str]
-            [clojure.test :refer [deftest is testing]]
+            [kotoba.test :refer [deftest is testing]]
             [aero.model :as model]))
 
 (deftest air-properties-are-standard-sea-level-values
