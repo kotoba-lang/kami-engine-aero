@@ -11,7 +11,7 @@
   constant to map it to a vehicle-scale Cd (full 3D Cd needs the D3Q19
   extension — calibration is the honest interim bridge)."
   (:require [cae.solver :as cae]
-            [clojure.edn :as edn]
+            [kotoba.lang.edn :as edn]
             [clojure.java.shell :as sh]
             [clojure.java.io :as io]
             [kotoba.lang.text :as str]))
